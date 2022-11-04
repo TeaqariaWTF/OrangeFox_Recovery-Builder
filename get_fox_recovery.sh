@@ -27,17 +27,10 @@ FOX_VENDOR_BRANCH="fox_12.1" # default is fox_12.1 (master, fox_10.0, fox_11.0, 
 test_build_device="miatoll"; # default is miatoll
 
 # build for the device (AOSP or Omni or virtual A/B (VAB) device ?)
-# for branches lower than 11.0
-  [ -z "$for_branches_lower_than_11" ] && for_branches_lower_than_11="0"; # default is 0
-  
-# for branches lower than 11.0, with virtual A/B partitioning
-  [ -z "$for_branches_lower_than_11_withVAB" ] && for_branches_lower_than_11_withVAB="0"; # default is 0
-  
-# for the 11.0 (or higher) branch
-  [ -z "$for_branches_higher_than_11" ] && for_branches_higher_than_11="1"; # default is 1
-  
-# for the 11.0 (or higher) branch, with virtual A/B partitioning
-  [ -z "$for_branches_higher_than_11_withVAB" ] && for_branches_higher_than_11_withVAB="0"; # default is 0
+FOX_OMNI_VAB_DEVICE="0"
+FOX_AOSP_VAB_DEVICE="0"
+   [ -z "$FOX_OMNI_VAB_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
+   [ -z "$FOX_AOSP_VAB_DEVICE" ] && FOX_AOSP_VAB_DEVICE="0"; # default is 0
 
 # by default, don't use FOX_VERSION & FOX_BUILD_TYPE for the "OFR build type & version"
 # commands; to use FOX_VERSION & FOX_BUILD_TYPE, export FOX_VERSION & FOX_BUILD_TYPE=1 before starting
@@ -112,10 +105,6 @@ get_twrp_minimal_manifest() {
      local MIN_MANIFEST="https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git"
   fi
   
-  if [ "$TWRP_MIN_MANIFEST" = "lineageos" ]; then
-     local MIN_MANIFEST="https://github.com/minimal-manifest-twrp/platform_manifest_twrp_lineageos.git"
-  fi
-  
   cd $MANIFEST_DIR
   echo "-- Initialising the $TWRP_BRANCH minimal manifest repo ..."
   repo init --depth=1 -u $MIN_MANIFEST -b $TWRP_BRANCH
@@ -125,7 +114,7 @@ get_twrp_minimal_manifest() {
   echo "-- Done."
 
   echo "-- Syncing the $TWRP_BRANCH minimal manifest repo ..."
-  repo sync -j$(nproc --all) --force-sync
+  repo sync
   [ "$?" != "0" ] && {
    abort "-- Failed to Sync the minimal manifest repo. Quitting."
   }
@@ -294,31 +283,28 @@ test_build() {
    export LC_ALL="C"
    
    export FOX_BUILD_DEVICE="$test_build_device"
-
-   echo "-- Compiling a test build for device \"$test_build_device\". This will take a *VERY* long time ..."
-   echo "-- Start compiling: "
    export OUT_DIR=$BASE_DIR/BUILDS/"$test_build_device"
+   
    cd $BASE_DIR/
    mkdir -p $OUT_DIR
+   
    cd $MANIFEST_DIR/
-
+   echo "-- Compiling a test build for device \"$test_build_device\". This will take a *VERY* long time ..."
+   echo "-- Start compiling: "
    . build/envsetup.sh
-   
-   # build for the device (AOSP or Omni or virtual A/B (VAB) device ?)>
-   if [ "$for_branches_lower_than_11" = "1" ]; then
-      lunch omni_"$test_build_device"-eng && mka -j$(nproc --all) recoveryimage
+
+   # build for the device
+   # are we building for a virtual A/B (VAB) device? (default is "no")
+   if [ "$FOX_OMNI_VAB_DEVICE" = "1" ]; then
+      lunch omni_"$test_build_device"-eng && mka bootimage
+   else
+      lunch omni_"$test_build_device"-eng && mka recoveryimage
    fi
-   
-   if [ "$for_branches_lower_than_11_withVAB" = "1" ]; then
-      lunch omni_"$test_build_device"-eng && mka -j$(nproc --all) bootimage
-   fi
-   
-   if [ "$for_branches_higher_than_11" = "1" ]; then
-      lunch twrp_"$test_build_device"-eng && mka -j$(nproc --all) adbd recoveryimage
-   fi
-   
-   if [ "$for_branches_higher_than_11_withVAB" = "1" ]; then
-      lunch twrp_"$test_build_device"-eng && mka -j$(nproc --all) adbd bootimage
+
+   if [ "$FOX_AOSP_VAB_DEVICE" = "1" ]; then
+      lunch twrp_"$test_build_device"-eng && mka adbd bootimage
+   else
+      lunch twrp_"$test_build_device"-eng && mka adbd recoveryimage
    fi
    
    # any results?
