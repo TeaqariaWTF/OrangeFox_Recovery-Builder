@@ -27,15 +27,15 @@ FOX_VENDOR_BRANCH="fox_12.1"; # default is fox_12.1 (master, fox_10.0, fox_11.0,
 test_build_device="miatoll"; # default is miatoll
 
 # are we building for a virtual A/B (VAB) device?  (default is "no")
-   [ -z "$FOX_OMNI_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
-   [ -z "$FOX_AOSP_DEVICE" ] && FOX_AOSP_VAB_DEVICE="1"; # default is 1
-   [ -z "$FOX_OMNI_VAB_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
-   [ -z "$FOX_AOSP_VAB_DEVICE" ] && FOX_AOSP_VAB_DEVICE="0"; # default is 0
+[ -z "$FOX_OMNI_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
+[ -z "$FOX_AOSP_DEVICE" ] && FOX_AOSP_VAB_DEVICE="1"; # default is 1
+[ -z "$FOX_OMNI_VAB_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
+[ -z "$FOX_AOSP_VAB_DEVICE" ] && FOX_AOSP_VAB_DEVICE="0"; # default is 0
 
 # by default, don't use FOX_VERSION & FOX_BUILD_TYPE for the "OFR build type & version"
 # commands; to use FOX_VERSION & FOX_BUILD_TYPE, export FOX_VERSION & FOX_BUILD_TYPE=1 before starting
-   [ -z "$FOX_VERSION" ] && FOX_VERSION="0"; # default is 0
-   [ -z "$FOX_BUILD_TYPE" ] && FOX_BUILD_TYPE="0"; # default is 0
+[ -z "$FOX_VERSION" ] && FOX_VERSION="0"; # default is 0
+[ -z "$FOX_BUILD_TYPE" ] && FOX_BUILD_TYPE="0"; # default is 0
 
 # the base version of the current OrangeFox
 FOX_BASE_VERSION="R11.1"; # default is R11.1, needed if FOX_VERSION set to 1
@@ -48,14 +48,6 @@ MANIFEST_DIR="$BASE_DIR/$FOX_BRANCH";
 
 # where to log the location of the manifest directory upon successful sync and patch
 SYNC_LOG="$BASE_DIR"/"$FOX_BRANCH"_"manifest.sav";
-
-# help
-if [ "$1" = "-h" -o "$1" = "--help" -o "$1" = "help" ]; then
-  echo "Script to set up things for building OrangeFox with the $DEVICE_BRANCH build system";
-  echo "Usage   = $0 [new_manifest_directory]";
-  echo "The default new manifest directory is \"$MANIFEST_DIR\"";
-  exit 0;
-fi
 
 # You can supply a path for the new manifest to override the default
 [ -n "$1" ] && MANIFEST_DIR="$1"; # default is 1
@@ -71,16 +63,24 @@ PATCH_FILE="$BASE_DIR/patch-manifest-$FOX_BRANCH.diff";
 
 # the directory in which the patch of the manifest will be executed
 MANIFEST_BUILD_DIR="$MANIFEST_DIR/build";
-  
+
+# ***************************************************************************************
+#                                         END OF VARIABLES
+# ***************************************************************************************
+
+# help
+if [ "$1" = "-h" -o "$1" = "--help" -o "$1" = "help" ]; then
+  echo "Script to set up things for building OrangeFox with the $DEVICE_BRANCH build system";
+  echo "Usage   = $0 [new_manifest_directory]";
+  echo "The default new manifest directory is \"$MANIFEST_DIR\"";
+  exit 0;
+fi
+
 # print message and quit
 abort() {
   echo "$@";
   exit;
 }
-
-# ***************************************************************************************
-#                                         END OF VARIABLES
-# ***************************************************************************************
 
 # init the script, ensure we have the patch file, and create the manifest directory
 init_script() {
