@@ -71,7 +71,9 @@ fi
 [ -z "$USE_SSH" ] && USE_SSH="0"; # default is 0
 
 # the "diff" file that will be used to patch the original manifest
-wget https://gitlab.com/OrangeFox/sync/-/raw/master/patches/patch-manifest-$FOX_BRANCH.diff $BASE_DIR
+# get the "diff" file
+curl -O -L https://gitlab.com/OrangeFox/sync/-/raw/master/patches/patch-manifest-$FOX_BRANCH.diff
+# define the path for the "diff" file
 PATCH_FILE="$BASE_DIR/patch-manifest-$FOX_BRANCH.diff";
 
 # the directory in which the patch of the manifest will be executed
