@@ -26,9 +26,7 @@ FOX_VENDOR_BRANCH="fox_12.1" # default is fox_12.1 (master, fox_10.0, fox_11.0, 
 # the device whose tree we can clone for compiling a test build
 test_build_device="miatoll"; # default is miatoll
 
-# build for the device (AOSP or Omni or virtual A/B (VAB) device ?)
-FOX_OMNI_VAB_DEVICE="0"
-FOX_AOSP_VAB_DEVICE="0"
+# are we building for a virtual A/B (VAB) device?  (default is "no")
    [ -z "$FOX_OMNI_VAB_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
    [ -z "$FOX_AOSP_VAB_DEVICE" ] && FOX_AOSP_VAB_DEVICE="0"; # default is 0
 
@@ -294,7 +292,6 @@ test_build() {
    . build/envsetup.sh
 
    # build for the device
-   # are we building for a virtual A/B (VAB) device? (default is "no")
    if [ "$FOX_OMNI_VAB_DEVICE" = "1" ]; then
       lunch omni_"$test_build_device"-eng && mka bootimage
    else
