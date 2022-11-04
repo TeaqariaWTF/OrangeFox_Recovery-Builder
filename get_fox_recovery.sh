@@ -65,7 +65,8 @@ fi
 
 # the "diff" file that will be used to patch the original manifest
 # get the "diff" file
-curl -O -L https://gitlab.com/OrangeFox/sync/-/raw/master/patches/patch-manifest-$FOX_BRANCH.diff
+local URL="https://gitlab.com/OrangeFox/sync/-/raw/master/patches/patch-manifest-$FOX_BRANCH.diff";
+curl -O -L $URL;
 # define the path for the "diff" file
 PATCH_FILE="$BASE_DIR/patch-manifest-$FOX_BRANCH.diff";
 
