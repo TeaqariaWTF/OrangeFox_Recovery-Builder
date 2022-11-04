@@ -1,0 +1,21 @@
+name: Building recovery
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    
+    steps:
+       - name: Checkout
+         uses: actions/checkout@master
+         
+       - name: Cleanup
+         run: bash -c "$(curl -sL https://raw.githubusercontent.com/rokibhasansagar/slimhub_actions/main/cleanup.sh)"
+
+       - name: Install packages
+         run: bash -c "$(curl -sL https://raw.githubusercontent.com/sarthakroy2002/Scripts/main/Installation%20Scripts/android_build_env.sh)"
+
+       - name: Build & Upload
+         run: bash -c "$(curl -sL https://raw.githubusercontent.com/Diwas007/OrangeFox_Recovery-Builder/master/get_fox_recovery.sh)"
