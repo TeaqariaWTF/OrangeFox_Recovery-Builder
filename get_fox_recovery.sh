@@ -27,6 +27,8 @@ FOX_VENDOR_BRANCH="fox_12.1"; # default is fox_12.1 (master, fox_10.0, fox_11.0,
 test_build_device="miatoll"; # default is miatoll
 
 # are we building for a virtual A/B (VAB) device?  (default is "no")
+   [ -z "$FOX_OMNI_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
+   [ -z "$FOX_AOSP_DEVICE" ] && FOX_AOSP_VAB_DEVICE="1"; # default is 1
    [ -z "$FOX_OMNI_VAB_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
    [ -z "$FOX_AOSP_VAB_DEVICE" ] && FOX_AOSP_VAB_DEVICE="0"; # default is 0
 
@@ -300,13 +302,17 @@ test_build() {
    # build for the device
    if [ "$FOX_OMNI_VAB_DEVICE" = "1" ]; then
       lunch omni_"$test_build_device"-eng && mka bootimage;
-   else
+   fi
+   
+   if [ "$FOX_OMNI_DEVICE" = "1" ]; then
       lunch omni_"$test_build_device"-eng && mka recoveryimage;
    fi
-
+   
    if [ "$FOX_AOSP_VAB_DEVICE" = "1" ]; then
       lunch twrp_"$test_build_device"-eng && mka adbd bootimage;
-   else
+   fi
+   
+   if [ "$FOX_AOSP_DEVICE" = "1" ]; then
       lunch twrp_"$test_build_device"-eng && mka adbd recoveryimage;
    fi
    
