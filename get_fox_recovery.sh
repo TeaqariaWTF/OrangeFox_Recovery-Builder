@@ -28,8 +28,8 @@ OEM="xiaomi"; # default is xiaomi (xiaomi,samsung,etc ?)
 test_build_device="miatoll"; # default is miatoll
 
 # are we building for a virtual A/B (VAB) device?  (default is "no")
-[ -z "$FOX_OMNI_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
-[ -z "$FOX_AOSP_DEVICE" ] && FOX_AOSP_VAB_DEVICE="1"; # default is 1
+[ -z "$FOX_OMNI_DEVICE" ] && FOX_OMNI_DEVICE="0"; # default is 0
+[ -z "$FOX_AOSP_DEVICE" ] && FOX_AOSP_DEVICE="1"; # default is 1
 [ -z "$FOX_OMNI_VAB_DEVICE" ] && FOX_OMNI_VAB_DEVICE="0"; # default is 0
 [ -z "$FOX_AOSP_VAB_DEVICE" ] && FOX_AOSP_VAB_DEVICE="0"; # default is 0
 
