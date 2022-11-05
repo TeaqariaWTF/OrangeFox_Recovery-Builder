@@ -1,7 +1,7 @@
 # 🦊 OrangeFox Recovery CI
 # About:
 A Free CI to Build OrangeFox Recovery From GitHub's Workflow.
-<br> **Note:** **This workflow only compiles `fox_9.0` branch or `OMNI` since, github's runner specification are poor! this workflow is not compatible to compile higher branch of OrangeFox Recovery.**
+<br> **Note:** **This workflow only compiles `fox_9.0` branch or `OMNI` since, github's runner specification are poor! this workflow is not compatible to compile higher branch of OrangeFox Recovery.But you can use `get_fox_recovery.sh` script file to compile using other CI service providers i.e. [CircleCI](https://github.com/marketplace/circleci), [CirrusCI](https://github.com/marketplace/cirrus-ci).**
 ***
 ## How to Use this Workflow ?
 ### - Fork and Build:
