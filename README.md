@@ -1,8 +1,10 @@
 # 🦊 OrangeFox Recovery CI
+# About:
 A Free CI to Build OrangeFox Recovery From GitHub's Workflow.
+<br> **Note:** **This workflow only compiles `fox_9.0` branch or `OMNI` since, github's runner specification are poor! this workflow is not compatible to compile higher branch of OrangeFox Recovery.**
 ***
 ## How to Use this Workflow ?
-### - Fork and Build
+### - Fork and Build:
 
 **Note:** **Read this table carefully and change the variables in `get_fox_recovery.sh` script file according to your need.**
 Variable's Name | Defaults | Variables
@@ -30,7 +32,7 @@ Variable's Name | Defaults | Variables
 * And that's it ! , to download the build see your Action's logs.
 ***
 
-## Credits
+## Credits:
 - [Sushrut1101](https://github.com/Sushrut1101) - For Helping
 - [Mikubill](https://github.com/Mikubill) - For [this](https://github.com/Mikubill/transfer)
 - [sarthakroy2002](https://github.com/sarthakroy2002) - For `android_build_env.sh` Script File
@@ -39,7 +41,7 @@ Variable's Name | Defaults | Variables
 - [Diwas007](https://github.com/Diwas007) - For Making This Happen
 - And Many More!
 
-# License
+# License:
 
         Copyright (c) 2022 Diwas007
 
