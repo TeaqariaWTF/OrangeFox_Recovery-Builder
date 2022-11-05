@@ -9,23 +9,22 @@ Variable's Name | Defaults | Variables
 ----- | ----- | -----
 `FOX_BRANCH` | default is `fox_12.1` | fox_9.0, fox_10.0, fox_11.0, fox_12.1 ?
 `TWRP_BRANCH` | default is `twrp-12.1` | twrp-9.0, twrp-10.0, twrp-11.0, twrp-12.1 ?
-`TWRP_MIN_MANIFEST` | default is `aosp` | aosp, lineageos, omni ?
+`TWRP_MIN_MANIFEST` | default is `aosp` | aosp, omni ?
 `DEVICE_BRANCH` | default is `fox_12.1` | it can be anything, may be fox_12.1
 `OEM` | default is `xiaomi` | xiaomi,samsung,etc ?
-`DEVICE_TREE_URL` | `https://gitlab.com/OrangeFox/device/miatoll.git` | your device tree URL
-`LOCAL_DEVICE_TREE_URL` | `git@gitlab.com:OrangeFox/device/miatoll.git` | your local device tree URL
+`DEVICE_TREE_URL` | `https://gitlab.com/OrangeFox/device/miatoll.git` | your device tree URL ?
+`LOCAL_DEVICE_TREE_URL` | `git@gitlab.com:OrangeFox/device/miatoll.git` | your local device tree URL ?
 `FOX_VENDOR_BRANCH` | default is `fox_12.1` | master, fox_10.0, fox_11.0, fox_12.1 ?
-`test_build_device` | default is `miatoll` | codename of your device
-`for_branches_lower_than_11` | default is `0` (is your device lower than android-11 then, change this to `1`) | `0` & `1`
-`for_branches_lower_than_11_withVAB` | default is `0` (is your device A/B then, change this to `1`) | `0` & `1`
-`for_branches_higher_than_11` | default is `1` (change this to `0` if you are building for your device) | `0` & `1`
-`for_branches_higher_than_11_withVAB` | default is `0` (is your device A/B then, change this to `1`) | `0` & `1`
+`test_build_device` | default is `miatoll` | codename of your device ?
+`FOX_OMNI_DEVICE` | default is `0` (is your device OMNI then, change this to `1`) | `0` & `1` ?
+`FOX_AOSP_DEVICE` | default is `0` (is your device AOSP then, change this to `1`) | `0` & `1` ?
+`FOX_OMNI_VAB_DEVICE` | default is `0` (is your device OMNI & A/B then, change this to `1`) | `0` & `1` ?
+`FOX_AOSP_VAB_DEVICE` | default is `1` (is your device AOSP & A/B then, change this to `1`) | `0` & `1` ?
 
 ### - Steps for running this workflow :
 
 * Fork this [repository](https://github.com/Diwas1111/Recovery-Builder) giving whatever name you want.
-* Go to `get_fox_recovery.sh` script file & change the variable name's default value using `Variables` from the table.
-**Note:** **`get_fox_recovery.sh` this script file compiles recovery for `miatoll` by default so, you need to change variables according to your need.**
+* Go to `get_fox_recovery.sh` script file & change the variable name's default value using `Variables` from the table <br> **Note:** **`get_fox_recovery.sh` this script file compiles recovery for `miatoll` by default so, you need to change variables according to your need.** </br>
 * Go to `Actions` tab and select the workflow named `Recovery Builder`.
 * Click `Run Workflow` button on the left of `This workflow has a workflow_dispatch event trigger` line.
 * And that's it ! , to download the build see your Action's logs.
