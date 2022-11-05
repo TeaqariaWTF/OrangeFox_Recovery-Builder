@@ -16,12 +16,13 @@
 # the branches we will be dealing with
 FOX_BRANCH="fox_12.1"; # default is fox_12.1 (fox_9.0, fox_10.0, fox_11.0, fox_12.1 ?)
 TWRP_BRANCH="twrp-12.1"; # default is twrp-12.1 (twrp-9.0, twrp-10.0, twrp-11.0, twrp-12.1 ?)
-TWRP_MIN_MANIFEST="aosp"; # default is aosp (aosp, lineageos, omni ?)
 DEVICE_BRANCH="fox_12.1"; # device tree branch, default is fox_12.1
-OEM="xiaomi"; # default is xiaomi (xiaomi,samsung,etc ?)
 DEVICE_TREE_URL="https://gitlab.com/OrangeFox/device/miatoll.git"; # device tree url, default is for miatoll
 LOCAL_DEVICE_TREE_URL="git@gitlab.com:OrangeFox/device/miatoll.git"; # local device tree url, default is for miatoll
 FOX_VENDOR_BRANCH="fox_12.1"; # default is fox_12.1 (master, fox_10.0, fox_11.0, fox_12.1 ?)
+# extras
+TWRP_MIN_MANIFEST="aosp"; # default is aosp (aosp, omni ?)
+OEM="xiaomi"; # default is xiaomi (xiaomi,samsung,etc ?)
 
 # the device whose tree we can clone for compiling a test build
 test_build_device="miatoll"; # default is miatoll
@@ -84,7 +85,7 @@ abort() {
 
 # init the script, ensure we have the patch file, and create the manifest directory
 init_script() {
-  echo "-- Starting the script ..."
+  echo "-- Starting the script ...";
   [ ! -f "$PATCH_FILE" ] && abort "-- I cannot find the patch file: $PATCH_FILE - quitting!";
 
   echo "-- The new build system will be located in \"$MANIFEST_DIR\"";
@@ -158,7 +159,7 @@ local URL="";
       URL="git@gitlab.com:OrangeFox/bootable/Recovery.git";
    fi
 
-   mkdir -p $MANIFEST_DIR/bootable
+   mkdir -p $MANIFEST_DIR/bootable;
    [ ! -d $MANIFEST_DIR/bootable ] && {
       echo "-- Invalid directory: $MANIFEST_DIR/bootable";
       return;
