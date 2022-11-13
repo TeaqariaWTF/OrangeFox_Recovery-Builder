@@ -17,15 +17,15 @@
 FOX_BRANCH="fox_12.1"; # default is fox_12.1 (fox_9.0, fox_10.0, fox_11.0, fox_12.1 ?)
 TWRP_BRANCH="twrp-12.1"; # default is twrp-12.1 (twrp-9.0, twrp-10.0, twrp-11.0, twrp-12.1 ?)
 DEVICE_BRANCH="fox_12.1"; # device tree branch, default is fox_12.1
-DEVICE_TREE_URL="https://gitlab.com/OrangeFox/device/miatoll.git"; # device tree url, default is for miatoll
-LOCAL_DEVICE_TREE_URL="git@gitlab.com:OrangeFox/device/miatoll.git"; # local device tree url, default is for miatoll
+DEVICE_TREE_URL="https://github.com/TeaqariaWTF/android_device_xiaomi_surya_twrp.git"; # device tree url, default is for miatoll
+LOCAL_DEVICE_TREE_URL="git@github.com:TeaqariaWTF/android_device_xiaomi_surya_twrp.git"; # local device tree url, default is for miatoll
 FOX_VENDOR_BRANCH="fox_12.1"; # default is fox_12.1 (master, fox_10.0, fox_11.0, fox_12.1 ?)
 # extras
 TWRP_MIN_MANIFEST="aosp"; # default is aosp (aosp, omni ?)
 OEM="xiaomi"; # default is xiaomi (xiaomi,samsung,etc ?)
 
 # the device whose tree we can clone for compiling a test build
-test_build_device="miatoll"; # default is miatoll
+test_build_device="surya"; # default is miatoll
 
 # are we building for a virtual A/B (VAB) device?  (default is "no")
 [ -z "$FOX_OMNI_DEVICE" ] && FOX_OMNI_DEVICE="0"; # default is 0
